@@ -1,30 +1,28 @@
-import functools
-#1
-with open('names.txt', 'r') as f:
-    print(max(f.readlines(), key=len))
-    #or
-    print(sorted([line.strip() for line in f], key=len)[-1:])
+from Animal import Animal, Dog, Cat, Skunk, Unicorn, Dragon
 
 
-#2
-with open('names.txt', 'r') as f:
-    print(sum(len(word) for word in f.read().split()))
+zoo_lst = [
+    Dog("Brownie", 10),
+    Cat("Zelda", 3),
+    Skunk("Stinky", 0),
+    Unicorn("Keith", 7),
+    Dragon("Lizzy", 1450)
+]
 
-#3
-with open('names.txt', 'r') as f:
-    lines = [line.strip() for line in f]
-    min_len = min(len(line) for line in lines)
-    print('\n'.join(line for line in lines if len(line) == min_len))
+doggo = Dog("Doggo", 80)
+kitty = Cat("Kitty", 80)
+stinky_jr = Skunk("Stinky Jr.", 80)
+clair = Unicorn("Clair", 80)
+mcfly = Dragon("McFly", 80)
 
-#4
-with open('names.txt', 'r') as f:
-    with open('name_length.txt', 'w') as output_file:
-        output_file.write('\n'.join(map(str, map(len, f.read().split()))))
-#with open('name_length.txt', 'r') as file:
-    #print(file.read())
+zoo_lst.extend([doggo, kitty, stinky_jr, clair, mcfly])
 
-#5
+for animal in zoo_lst:
+    if animal.is_hungry():
+        print(type(animal).__name__ + " " + animal.name)
+        while animal.is_hungry():
+            animal.feed()
+    animal.talk()
+    animal.special_method()
 
-name_length = int(input("Enter name length: "))
-with open('names.txt', 'r') as f:
-    print('\n'.join(line for line in [line.strip() for line in f] if len(line) == name_length))
+print(animal.zoo_name)
